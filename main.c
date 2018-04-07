@@ -51,6 +51,7 @@ uint16_t posX, posY;
 int temp;
 int slevel;
 void Menu(void);
+void GraphPlot(void);
 void buttemppress(uint16_t posX,uint16_t posY);
 void buttemprelease(uint16_t posX,uint16_t posY);
 void butspeedpress(uint16_t posX,uint16_t posY);
@@ -128,6 +129,7 @@ int main(void)
 		buttemprelease(posX,posY);
 		butspeedrelease(posX,posY);
 		butgraphpress(posX,posY);
+		GraphPlot();
 	}
 	if(posX > 205 && posX < 250 && posY > 28 && posY < 76) //out
 	{		
@@ -664,9 +666,9 @@ int speed(int slevel)
 	posY = TCS_Read_Y();
 	if(posX > 50 && posX < 85 && posY > 20 && posY < 60 )
 		slevel=1;
-	else if(posX > 90 && posX < 125 && posY > 20 && posY < 60 ) // press 2
+	else if(posX > 86 && posX < 120 && posY > 20 && posY < 60 ) // press 2
 		slevel=2;
-	else if(posX > 130 && posX < 165 && posY > 20 && posY < 60) // press 3
+	else if(posX > 125 && posX < 150 && posY > 20 && posY < 60) // press 3
 		slevel=3;
 	
 	if(slevel==1) // press 1
@@ -1035,6 +1037,24 @@ void butpower(uint16_t posX,uint16_t posY){
 			LCD_DrawLine(165, i, 25, Vertical);		
 		}
 	}
+}
+void GraphPlot(void)
+{
+		LCD_Clear(Mint);
+		
+		LCD_SetTextColor(Black);
+		for(int x=0;x<=180;x++)
+			LCD_DrawLine(20+x,10,300,Horizontal);
+		
+		LCD_SetTextColor(Red);
+		for(int x=0;x<3;x++)
+			LCD_DrawLine(180+x,60,250,Horizontal);
+		for(int x=0;x<3;x++)
+			LCD_DrawLine(50,60+x,130,Vertical);
+		LCD_SetTextColor(White);
+		LCD_DisplayChar(Line1,15,'T');
+		LCD_DisplayChar(Line7,293,'t');
+		
 }
 /* USER CODE END 4 */
 
